@@ -1,0 +1,24 @@
+extends ../layouts/common
+block content
+  link(rel='stylesheet' type='text/css' href="/stylesheets/style.css")
+  main
+    h2 Oh hi,
+    p 
+    a.btn.btn-primary(href='/users/create', style='width:10%; margin-left: 50px') Add New User
+    table.table
+     thead.thead-dark
+      tr
+        th ID
+        th Name
+        th Username
+        th Password
+        th
+      
+      each user in users
+        tr 
+          td= user.id
+          td= user.name
+          td= user.username
+          td= user.password
+          td
+            a.btn.btn-info(href='/users/'+ user.id) View
