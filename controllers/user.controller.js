@@ -49,3 +49,14 @@ module.exports.postCreate = function (req, res) {
   res.redirect("/users")// update added dream
 };
 
+module.exports.search = function (req, res) {
+  var q = req.query.q;
+  con.query('SELECT * FROM users', function (err, result) { // retrieve data 
+    if (err) throw err;
+    var matchedUsers = result.filter(function(user){
+      return user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
+    });
+    res.render('./users/users', { users: matchedUsers});
+
+  });
+}
