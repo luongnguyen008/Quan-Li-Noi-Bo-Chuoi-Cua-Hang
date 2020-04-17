@@ -8,6 +8,8 @@ router.get('/create', controller.create);
 
 router.post('/create', controller.postCreate);
 
+router.get('/search', controller.search);
+
 router.get('/:id', controller.viewUser);
 
 module.exports = router;
