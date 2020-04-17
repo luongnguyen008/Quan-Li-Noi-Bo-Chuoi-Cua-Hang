@@ -11,7 +11,12 @@ block content
         th ID
         th Name
         th Username
-        th Password
+        th Id Card
+        th Date of birth
+        th Gender
+        th Phone
+        th Address
+        th Date In
         th
       
       each user in users
@@ -19,6 +24,11 @@ block content
           td= user.id
           td= user.name
           td= user.username
-          td= user.password
+          td= user.idcard
+          td= user.dateofbirth
+          td= user.gender
+          td= user.phone
+          td= user.address
+          td= user.datein
           td
             a.btn.btn-info(href='/users/'+ user.id) View

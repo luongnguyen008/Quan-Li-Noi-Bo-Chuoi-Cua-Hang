@@ -8,7 +8,41 @@ block content
 	form(action="/users/create", method="POST")
 		label
 		| New User
-		input(name='username', type='text', maxlength='100', value=values ? values.username : "")
-		input(name='password', type='password', maxlength='100', value=values ? values.password : "")
-		button Add User
-	
+
+		.form-group
+		label(for='username') Username
+		input.form-control.col-md-6(name='username', type='text', maxlength='100', value=values ? values.username : "")
+
+		.form-group
+		label(for='address') Password
+		input.form-control.col-md-6(name='password', type='password', maxlength='100', value=values ? values.password : "")
+
+		.form-group
+		label(for='name') Name
+		input.form-control.col-md-6(name='name', type='text', maxlength='100', value=values ? values.name : "")
+
+		.form-group
+		label(for='dateofbirth') Date of birth
+		input.form-control.col-md-6(name='dateofbirth', type='text', maxlength='100', value=values ? values.dateofbirth : "")
+
+		.form-group
+		label(for='gender') Gender
+		input.form-control.col-md-6(name='gender', type='text', maxlength='100', value=values ? values.gender : "")
+
+		.form-group
+		label(for='phone') Phone
+		input.form-control.col-md-6(name='phone', type='text', maxlength='100', value=values ? values.phone : "")
+
+		.form-group
+		label(for='idcard') Identify Document
+		input.form-control.col-md-6(name='idcard', type='text', maxlength='100', value=values ? values.idcard : "")
+
+		.form-group
+		label(for='address') Address
+		input.form-control.col-md-6(name='address', type='text', maxlength='100', value=values ? values.address : "")
+
+		.form-group
+		label(for='datein') Date In
+		input.form-control.col-md-6(name='datein', type='text', maxlength='100', value=values ? values.datein : "")
+
+		button.btn.btn-primary Add User
