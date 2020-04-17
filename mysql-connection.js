@@ -1,16 +1,16 @@
 var mysql = require('mysql');
 
 var con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "root",
-  database: "mydb"
+  host: "sql12.freemysqlhosting.net",
+  user: "sql12333999",
+  password: "umNhZIfiIQ",
+  database: "sql12333999"
 });
 
 con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
- /* var sql = "INSERT INTO users (id, name, username, password) VALUES ('1', 'Nguyen', 'nguyen268', 'e10adc3949ba59abbe56e057f20f883e')";
+  /*var sql = "DELETE FROM users";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("Chenged");
