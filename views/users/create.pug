@@ -1,7 +1,7 @@
 extends ../layouts/common
 block content
-
-	h2 Create User
+	.container.mt-3
+	h2.text-center Create User
 	if errors
 		each error in errors
 			.alert.alert-danger= error
@@ -44,5 +44,5 @@ block content
 		.form-group
 		label(for='datein') Date In
 		input.form-control.col-md-6(name='datein', type='text', maxlength='100', value=values ? values.datein : "")
-
+		br
 		button.btn.btn-primary Add User
