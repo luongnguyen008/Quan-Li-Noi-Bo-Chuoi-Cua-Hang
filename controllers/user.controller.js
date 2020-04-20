@@ -64,7 +64,7 @@ module.exports.postCreate = function (req, res) {
   var values = [
   req.body.id, 
   req.body.username, 
-  md5(req.body.password), // a nghĩ nó ở cái nút add user vì chỗ này có còn chưa chạy
+  md5(req.body.password), 
   req.body.name, 
   req.body.dateofbirth,
   req.body.gender,
@@ -80,7 +80,7 @@ module.exports.postCreate = function (req, res) {
         });
   res.redirect('/users')// update added dream
 };
-<<<<<<< HEAD
+
 
 module.exports.search = function (req, res) {
   var q = req.query.q;
@@ -92,4 +92,30 @@ module.exports.search = function (req, res) {
     res.render('./users/users', { users: matchedUsers});
 
   });
-}
+};
+module.exports.delete =  function(req, res){
+  var id = req.params.id;
+ con.query('DELETE FROM users WHERE id = ?',id, function (err, result){
+  if (err) throw err;
+  res.redirect('/users');
+
+ });
+};
+
+module.exports.edit = function(req, res){
+  var id = req.params.id; 
+  con.query('SELECT * FROM users WHERE id = ?',id, function (err, result){
+    if (err) throw err;
+    res.render('./users/editUser', {users : result});
+});
+};
+module.exports.postEdit =  function(req, res){
+  
+  con.query('UPDATE users SET username = ? ,password = ?, name=?, dateofbirth=?, gender=?, phone=?, idcard=?, address=?, datein=?  WHERE id =? ',[req.body.username, md5(req.body.password), req.body.name, req.body.dateofbirth, req.body.gender, req.body.phone, req.body.idcard, req.body.address, req.body.datein, req.params.id],  function(err, result){
+    if (err) throw err;
+    res.redirect('/users');
+  });
+};
+
+
+
