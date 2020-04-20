@@ -21,6 +21,7 @@ app.use('/users', authMiddleware.requireAuth, userRoute)
 app.use('/products',authMiddleware.requireAuth, productRoute)
 app.use('/auth', authRoute)
 
+
 // index page 
 app.get('/', function(req, res) {
     res.render('index');
