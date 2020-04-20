@@ -1,0 +1,35 @@
+extends ../layouts/common
+block content
+ .container.mt-3
+  h3.text-center Edit Infomation User
+  form(method='POST')
+
+    .form-group
+    label(for='username') Username
+    input.form-control(type='text', name='username', value=users ? users[0].username : "")
+
+    label(for='password') Password
+    input.form-control(type='text', name='password', value=users ? users[0].password : "")
+
+    label(for='name') Name
+    input.form-control(type='text', name='name', value=users ? users[0].name : "")
+
+    label(for='dateofbirth') Date of Birth
+    input.form-control(type='text', name='dateofbirth', value=users ? users[0].dateofbirth : "")
+
+    label(for='gender') Gender
+    input.form-control(type='text', name='gender', value=users ? users[0].gender : "")
+
+    label(for='phone') Phone
+    input.form-control(type='text', name='phone', value=users ? users[0].phone : "")
+
+    label(for='idcard') ID Card
+    input.form-control(type='text', name='idcard', value=users ? users[0].idcard : "")
+
+    label(for='address') Address
+    input.form-control(type='text', name='address', value=users ? users[0].address : "")
+
+    label(for='datein') Date In
+    input.form-control(type='text', name='datein', value=users ? users[0].datein : "")
+    br
+    button.btn.btn-primary Submit
