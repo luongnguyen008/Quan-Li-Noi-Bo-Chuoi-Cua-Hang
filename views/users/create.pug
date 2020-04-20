@@ -1,6 +1,6 @@
 extends ../layouts/common
 block content
-	.container.mt-3
+	.container.method-3
 	h2.text-center Create User
 	if errors
 		each error in errors
@@ -23,7 +23,7 @@ block content
 
 		.form-group
 		label(for='dateofbirth') Date of birth
-		input.form-control.col-md-6(name='dateofbirth', type='text', maxlength='100', value=values ? values.dateofbirth : "")
+		input.form-control.col-md-6(name='dateofbirth', type='date', maxlength='100', value=values ? values.dateofbirth : "")
 
 		.form-group
 		label(for='gender') Gender
@@ -43,6 +43,6 @@ block content
 
 		.form-group
 		label(for='datein') Date In
-		input.form-control.col-md-6(name='datein', type='text', maxlength='100', value=values ? values.datein : "")
+		input.form-control.col-md-6(name='datein', type='date', maxlength='100', value=values ? values.datein : "")
 		br
 		button.btn.btn-primary Add User
