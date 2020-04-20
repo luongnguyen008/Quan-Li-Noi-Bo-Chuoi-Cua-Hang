@@ -1,0 +1,13 @@
+extends ../layouts/common
+block content
+  link(rel='stylesheet' type='text/css' href="/stylesheets/style.css")
+  main
+   h2 Oh hi,
+   each product in products
+    .card(style='width: 18rem; height: 15rem;')
+     img.card-img-top(src='https://www.rspcasa.org.au/wp-content/uploads/2019/01/Adopt-a-cat-or-kitten-from-RSPCA.jpg', alt='Card image cap', width='300', height='300')
+     .card-body
+      h5.card-title= product.name
+      p.card-text
+       | Some quick example text to build on the card title and make up the bulk of the card&apos;s content.
+      a.btn.btn-primary(href='#') Go somewhere
