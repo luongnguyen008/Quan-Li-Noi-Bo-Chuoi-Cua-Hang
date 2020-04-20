@@ -15,7 +15,7 @@ block content
     input.form-control(type='text', name='name', value=users ? users[0].name : "")
 
     label(for='dateofbirth') Date of Birth
-    input.form-control(type='text', name='dateofbirth', value=users ? users[0].dateofbirth : "")
+    input.form-control(type='date', name='dateofbirth', value=users ? users[0].dateofbirth : "")
 
     label(for='gender') Gender
     input.form-control(type='text', name='gender', value=users ? users[0].gender : "")
@@ -30,6 +30,6 @@ block content
     input.form-control(type='text', name='address', value=users ? users[0].address : "")
 
     label(for='datein') Date In
-    input.form-control(type='text', name='datein', value=users ? users[0].datein : "")
+    input.form-control(type='date', name='datein', value=users ? users[0].datein : "")
     br
     button.btn.btn-primary Submit
