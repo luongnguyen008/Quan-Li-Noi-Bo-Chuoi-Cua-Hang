@@ -64,7 +64,7 @@ module.exports.postCreate = function (req, res) {
   var values = [
   req.body.id, 
   req.body.username, 
-  md5(req.body.password), // a nghĩ nó ở cái nút add user vì chỗ này có còn chưa chạy
+  md5(req.body.password),
   req.body.name, 
   req.body.dateofbirth,
   req.body.gender,
@@ -80,7 +80,6 @@ module.exports.postCreate = function (req, res) {
         });
   res.redirect('/users')// update added dream
 };
-<<<<<<< HEAD
 
 module.exports.search = function (req, res) {
   var q = req.query.q;
