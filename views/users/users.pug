@@ -18,6 +18,8 @@ block content
         th Address
         th Date In
         th
+        th
+        th
       
       each user in users
         tr 
@@ -32,3 +34,7 @@ block content
           td= user.datein
           td
             a.btn.btn-info(href='/users/'+ user.id) View
+          td
+            a.btn.btn-primary(href='/users/edit/'+user.id) Edit
+          td
+            a.btn.btn-danger(href='/users/delete/' +user.id) Delete
