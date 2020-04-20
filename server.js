@@ -19,6 +19,7 @@ app.use(express.static('public'))
 app.use('/users', authMiddleware.requireAuth, userRoute)
 app.use('/auth', authRoute)
 
+
 // index page 
 app.get('/', function(req, res) {
     res.render('index');
