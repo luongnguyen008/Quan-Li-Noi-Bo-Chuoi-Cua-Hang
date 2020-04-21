@@ -1,10 +1,10 @@
 var mysql = require('mysql');
 
 var con = mysql.createConnection({
-  host: "sql12.freemysqlhosting.net",
-  user: "sql12333999",
-  password: "umNhZIfiIQ",
-  database: "sql12333999"
+  host: "remotemysql.com",
+  user: "e95UAjQLoi",
+  password: "V5qDiUSVge",
+  database: "e95UAjQLoi"
 });
 
 con.connect(function(err) {
