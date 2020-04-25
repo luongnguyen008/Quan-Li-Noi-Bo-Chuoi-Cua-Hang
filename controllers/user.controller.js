@@ -15,14 +15,6 @@ module.exports.create = function (req, res) {
   res.render('./users/create')
 };
 
-module.exports.viewUser = function(req, res){
-  var id = req.params.id;
-  con.query('SELECT * FROM users WHERE id = ?', id, function (err, result) { 
-  if (err) throw err;
-  res.render('./users/viewUser', { users: result});
-});
-};
-
 module.exports.postCreate = function (req, res) {
   req.body.id = shortid.generate(); //generate random id
   //validation
@@ -71,48 +63,15 @@ module.exports.postCreate = function (req, res) {
   req.body.phone,
   req.body.idcard,
   req.body.address,
-  req.body.datein
+  req.body.datein,
+  req.body.storeId
   ]; // create an array that include user inputs 
   console.log(req.body) //test
-    con.query('INSERT INTO users (id, username, password, name, dateofbirth, gender, phone, idcard, address, datein) VALUES (?)',[values], function(err, result){
+    con.query('INSERT INTO users (id, username, password, name, dateofbirth, gender, phone, idcard, address, datein, storeId) VALUES (?)',[values], function(err, result){
         if(err) throw err;
             console.log("1 record inserted"); //checked
         });
   res.redirect('/users')// update added dream
-};
-
-module.exports.search = function (req, res) {
-  var q = req.query.q;
-  con.query('SELECT * FROM users', function (err, result) { // retrieve data 
-    if (err) throw err;
-    var matchedUsers = result.filter(function(user){
-      return user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
-    });
-    res.render('./users/users', { users: matchedUsers});
-
-  });
-};
-module.exports.delete =  function(req, res){
-  var id = req.params.id;
- con.query('DELETE FROM users WHERE id = ?',id, function (err, result){
-  if (err) throw err;
-  res.redirect('/users');
-
- });
-};
-
-module.exports.edit = function(req, res){
-  var id = req.params.id; 
-  con.query('SELECT * FROM users WHERE id = ?',id, function (err, result){
-    if (err) throw err;
-    res.render('./users/editUser', {users : result});
-});
-};
-module.exports.postEdit =  function(req, res){
-  con.query('UPDATE users SET username = ? ,password = ?, name=?, dateofbirth=?, gender=?, phone=?, idcard=?, address=?, datein=?  WHERE id =? ',[req.body.username, md5(req.body.password), req.body.name, req.body.dateofbirth, req.body.gender, req.body.phone, req.body.idcard, req.body.address, req.body.datein, req.params.id],  function(err, result){
-    if (err) throw err;
-    res.redirect('/users');
-  });
 };
 
 
