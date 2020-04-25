@@ -2,6 +2,7 @@ const express = require('express')
 const port = 3000
 var userRoute = require('./routes/user.route');
 var productRoute = require('./routes/product.route');
+var storeRoute= require('./routes/store.route');
 var authRoute = require('./routes/auth.route');
 const cookieParser = require('cookie-parser');
 const app = express()
@@ -19,6 +20,7 @@ app.use(express.static('public'))
 
 app.use('/users', authMiddleware.requireAuth, userRoute)
 app.use('/products',authMiddleware.requireAuth, productRoute)
+app.use('/stores',authMiddleware.requireAuth, storeRoute)
 app.use('/auth', authRoute)
 
 
