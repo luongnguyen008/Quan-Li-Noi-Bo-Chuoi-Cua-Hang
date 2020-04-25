@@ -3,6 +3,7 @@ var con = require('../mysql-connection')
 const shortid = require('shortid')
 var md5 = require('md5')
 
+
 module.exports.index = function (req, res) {
     con.query('SELECT * FROM users', function (err, result) { // retrieve data 
     if (err) throw err;
@@ -10,7 +11,6 @@ module.exports.index = function (req, res) {
 
   });
 };
-
 module.exports.create = function (req, res) {
   res.render('./users/create')
 };
@@ -46,6 +46,9 @@ module.exports.postCreate = function (req, res) {
   if(!req.body.datein){
     errors.push("datein is required");
   }
+  if(!req.body.storeId){
+    errors.push("Id store is required");
+  }
   if(errors.length){
     res.render('./users/create', {
       errors: errors,
@@ -73,6 +76,5 @@ module.exports.postCreate = function (req, res) {
         });
   res.redirect('/users')// update added dream
 };
-
 
 
