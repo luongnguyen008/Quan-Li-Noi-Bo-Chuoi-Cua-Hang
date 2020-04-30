@@ -9,7 +9,7 @@ module.exports.postLogin = function (req, res, next) {
 	var username = req.body.username;
 	var password = req.body.password;
 	con.query('SELECT * FROM users WHERE username = ?',[username], function (err, result) { //result trả về 1 array chứa object
-		console.log(result[0])
+		//console.log(typeof result[0].username)
 		if (err) throw err;
 		if(result[0] === undefined || result[0].username !== username) {
 			res.render('auth/login', {
@@ -35,7 +35,13 @@ module.exports.postLogin = function (req, res, next) {
 		res.cookie('userId', result[0].id, {
 			signed: true
 		})
-		res.redirect('/stores');
+		if (result[0].username.localeCompare('admin') === 0){
+			res.redirect('/stores');
+		}
+		if (result[0].username.localeCompare('admin') !== 0){
+			res.redirect('/products');
+		}
+		
 
 });
 };
