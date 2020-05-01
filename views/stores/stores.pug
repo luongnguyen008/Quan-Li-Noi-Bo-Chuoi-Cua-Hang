@@ -1,7 +1,29 @@
-each store in stores
-	a(href='/stores/'+ store.storeId) View 
-	span= store.storeId
-	br
-a.btn.btn-primary(href='/users/create', style='width:10%; margin-left: 50px') Add New User
+link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css")
+link(rel='stylesheet' type='text/css' href="/stylesheets/style.css")
 br
+a.btn.btn-primary(href='/users/create') Add New User
+a.btn.btn-Success(href='/stores/createStore') Add New Store
 a.btn.btn-primary(href='/logout') Log out
+h2 List of Stores
+  table.table
+    thead.thead-dark
+      tr
+        th Stores Id
+        th Name of Stores
+        th Address of Store
+        th Date Open
+        th
+        th
+        th
+    each store in stores  
+      tr 
+        td= store.storeId
+        td= store.storeName
+        td= store.storeAddress
+        td= store.dateCreate
+        td
+          a.btn.btn-primary(href='/stores/'+ store.storeId) View
+        td
+          a.btn.btn-Success(href='/stores/' + store.storeId + '/edit' ) Edit
+        td
+          a.btn.btn-Danger(href='/stores/deleteStore/'+ store.storeId) Delete
