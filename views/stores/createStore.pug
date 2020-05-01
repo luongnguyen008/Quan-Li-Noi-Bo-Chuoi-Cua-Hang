@@ -1,0 +1,26 @@
+extends ../layouts/common
+block content
+	if errors
+		each error in errors
+			.alert.alert-danger= error
+	h2.text-center Create Store
+	.container.mt-3
+		form(action="/stores/createStore", method="POST")
+			.form-group
+				label Store ID
+				input.form-control.col-md-6(name='storeId', type='text', maxlength='100', value=values ? values.storeId : "")
+
+			.form-group
+				label Name of Store
+				input.form-control.col-md-6(name='storeName', type='text', maxlength='100', value=values ? values.storeName : "")
+
+			.form-group
+				label Address of Store
+				input.form-control.col-md-6(name='storeAddress', type='text', maxlength='100', value=values ? values.storeAddress : "")
+
+			.form-group
+				label Date Open
+				input.form-control.col-md-6(name='dateCreate', type='date', maxlength='100', value=values ? values.dateCreate : "")
+
+				br
+				button.btn.btn-primary(type='submit') Add Stores

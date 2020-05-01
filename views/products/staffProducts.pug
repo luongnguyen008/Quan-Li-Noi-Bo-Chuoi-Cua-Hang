@@ -1,0 +1,37 @@
+html
+   head
+    meta(charset='utf-8')
+    title Welcome to my website!
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='A cool thing made with Glitch')
+    link#favicon(rel='icon', href='/images/favicon-96x96.png', type='image/png')
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css", integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh", crossorigin="anonymous")
+   body
+      header
+       nav.navbar.navbar-expand-lg.navbar-light.bg-light
+        ul.navbar-nav.mr-auto
+          li.nav-item.active
+            a.nav-link(href='') Products
+          li.nav-item
+            a.nav-link(href='/about') Cart
+        ul.navbar-nav.ml-auto
+          li
+            if user
+             p.nav-link(href='#')= user.name
+          li
+            if !user
+             a.btn.btn-primary(href='/auth/login') Login
+          li 
+            a.nav-link(href='/logout') Log out
+      link(rel='stylesheet' type='text/css' href="/stylesheets/style.css")
+      main
+       h2 Oh hi,
+       each product in products
+        .card(style='width: 18rem; height: 15rem;')
+         img.card-img-top(src='https://www.rspcasa.org.au/wp-content/uploads/2019/01/Adopt-a-cat-or-kitten-from-RSPCA.jpg', alt='Card image cap', width='300', height='300')
+         .card-body
+          h5.card-title= product.name
+          p.card-text
+           | Some quick example text to build on the card title and make up the bulk of the card&apos;s content.
+          a.btn.btn-primary(href='#') Go somewhere

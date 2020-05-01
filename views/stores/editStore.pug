@@ -1,0 +1,20 @@
+link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css")
+link(rel='stylesheet' type='text/css' href="/stylesheets/style.css")
+.container.mt-3
+  h3.text-center Edit Information Stores
+  form(method='POST')
+
+    .form-group
+    label(for='storeId') StoreId
+    input.form-control.col-md-6(type='text', name='storeId', value=stores ? stores[0].storeId : "")
+
+    label(for='storeName') Name of Store
+    input.form-control.col-md-6(type='text', name='storeName', value=stores ? stores[0].storeName : "")
+
+    label(for='storeAddress') Address of Store
+    input.form-control.col-md-6(type='text', name='storeAddress', value=stores ? stores[0].storeAddress : "")
+
+    label(for='dateCreate') Date Open
+    input.form-control.col-md-6(type='date', name='dateCreate', value=stores ? stores[0].dateCreate : "")
+    br
+    button.btn.btn-primary Submit
