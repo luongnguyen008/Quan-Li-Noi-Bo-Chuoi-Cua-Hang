@@ -20,9 +20,8 @@ app.use(express.static('public'))
 
 app.use('/users', authMiddleware.requireAuth, userRoute)
 app.use('/products',authMiddleware.requireAuth, productRoute)
-app.use('/stores',authMiddleware.requireAuth, storeRoute)
+app.use('/stores', authMiddleware.adminAuth, storeRoute)
 app.use('/auth', authRoute)
-
 
 // index page 
 app.get('/', function(req, res) {
@@ -33,6 +32,11 @@ app.get('/', function(req, res) {
 app.get('/about', function(req, res) {
     res.render('about');
 });
+
+app.get('/logout', function(req, res){
+	res.clearCookie("userId");
+	res.redirect('/')
+})
 
 
 app.listen(port, () => console.log('Example app listening at http://localhost:' + port))
