@@ -11,12 +11,10 @@ html
       header
        nav.navbar.navbar-expand-lg.navbar-light.bg-light
         ul.navbar-nav.mr-auto
-          li.nav-item
-            a.nav-link(href='/stores/'+ products[0].storeId +'/users') Users
           li.nav-item.active
             a.nav-link(href='') Products
           li.nav-item
-            a.nav-link(href='/about') About
+            a.nav-link(href='/about') Cart
         ul.navbar-nav.ml-auto
           li
             if user
@@ -24,6 +22,8 @@ html
           li
             if !user
              a.btn.btn-primary(href='/auth/login') Login
+          li 
+            a.nav-link(href='/logout') Log out
       link(rel='stylesheet' type='text/css' href="/stylesheets/style.css")
       main
        h2 Oh hi,
