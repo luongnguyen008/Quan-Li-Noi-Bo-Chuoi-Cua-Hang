@@ -1,4 +1,4 @@
-cdcdvar mysql = require('mysql')
+var mysql = require('mysql')
 var con = require('../mysql-connection')
 const shortid = require('shortid')
 var md5 = require('md5')
