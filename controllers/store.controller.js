@@ -1,4 +1,4 @@
-var mysql = require('mysql')
+cdcdvar mysql = require('mysql')
 var con = require('../mysql-connection')
 const shortid = require('shortid')
 var md5 = require('md5')
@@ -79,70 +79,3 @@ module.exports.storeProducts = function(req, res){
 
   });
 };
-
-module.exports.editStores = function(req, res){
-  var id = req.params.storeId; 
-  con.query('SELECT * FROM stores WHERE storeId = ?',id, function (err, result){
-    if (err) throw err;
-    //console.log(result[0].id);
-    res.render('./stores/editStore', {stores : result});
-});
-};
-
-
-module.exports.postEditStores =  function(req, res){
-  var storeId = req.params.storeId
-  con.query('UPDATE stores SET storeId = ? ,storeName = ?, storeAddress =?, dateCreate=? WHERE storeId =? ',[req.body.storeId, req.body.storeName, req.body.storeAddress, req.body.dateCreate, req.params.storeId],  function(err, result){
-    if (err) throw err;
-     res.redirect('/stores');
-  });
-};
-
-module.exports.deleteStore = function(req, res){
-   var storeId = req.params.storeId; 
-  con.query('DELETE FROM stores WHERE storeId = ?',storeId, function (err, result){
-    if (err) throw err;
-  res.redirect('/stores');
- });
-};
-
-module.exports.createStore = function (req, res) {
-  res.render('./stores/createStore')
-};
-
-module.exports.postCreateStore = function (req, res) {
-  var errors = [];
-  if(!req.body.storeId){
-    errors.push("Store ID is required");
-  }
-  if(!req.body.storeName){
-    errors.push("Name is required");
-  }
-  if(!req.body.storeAddress){
-    errors.push("Address is required");
-  }
-  if(!req.body.dateCreate){
-    errors.push("Date open is required");
-  }
-  
-  if(errors.length){
-    res.render('/stores/createStore', {
-      errors: errors,
-      values: req.body
-    });
-    return;
-  }
-  var values = [
-  req.body.storeId, 
-  req.body.storeName, 
-  req.body.storeAddress,
-  req.body.dateCreate 
-  ]; // create an array that include store inputs 
-  console.log(req.body) //test
-    con.query('INSERT INTO stores (storeId, storeName, storeAddress, dateCreate) VALUES (?)',[values], function(err, result){
-        if(err) throw err;
-            console.log("1 record inserted"); //checked
-        });
-  res.redirect('/stores')// update added dream
-};
-
