@@ -8,7 +8,6 @@ module.exports.index = function (req, res) {
     con.query('SELECT * FROM users', function (err, result) { // retrieve data 
     if (err) throw err;
     res.render('./users/users', { users: result});
-
   });
 };
 module.exports.create = function (req, res) {
@@ -17,57 +16,18 @@ module.exports.create = function (req, res) {
 
 module.exports.postCreate = function (req, res) {
   req.body.id = shortid.generate(); //generate random id
-  //validation
-  var errors = [];
-  if(!req.body.username){
-    errors.push("Username is required");
-  }
-  if(!req.body.password){
-    errors.push("Password is required");
-  }
-  if(!req.body.name){
-    errors.push("name is required");
-  }
-  if(!req.body.dateofbirth){
-    errors.push("dob is required");
-  }
-  if(!req.body.gender){
-    errors.push("gender is required");
-  }
-  if(!req.body.phone){
-    errors.push("phone is required");
-  }
-  if(!req.body.idcard){
-    errors.push("idcard is required");
-  }
-  if(!req.body.address){
-    errors.push("address is required");
-  }
-  if(!req.body.datein){
-    errors.push("datein is required");
-  }
-  if(!req.body.storeId){
-    errors.push("Id store is required");
-  }
-  if(errors.length){
-    res.render('./users/create', {
-      errors: errors,
-      values: req.body
-    });
-    return;
-  }
   var values = [
-  req.body.id, 
-  req.body.username, 
-  md5(req.body.password),
-  req.body.name, 
-  req.body.dateofbirth,
-  req.body.gender,
-  req.body.phone,
-  req.body.idcard,
-  req.body.address,
-  req.body.datein,
-  req.body.storeId
+        req.body.id, 
+        req.body.username, 
+        md5(req.body.password),
+        req.body.name, 
+        req.body.dateofbirth,
+        req.body.gender,
+        req.body.phone,
+        req.body.idcard,
+        req.body.address,
+        req.body.datein,
+        req.body.storeId
   ]; // create an array that include user inputs 
   console.log(req.body) //test
     con.query('INSERT INTO users (id, username, password, name, dateofbirth, gender, phone, idcard, address, datein, storeId) VALUES (?)',[values], function(err, result){
