@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 
 app.use(express.static('public'))
 
-app.use('/users', authMiddleware.requireAuth, userRoute)
+app.use('/users', authMiddleware.adminAuth, userRoute)
 app.use('/products',authMiddleware.requireAuth, productRoute)
 app.use('/stores', authMiddleware.adminAuth, storeRoute)
 app.use('/auth', authRoute)
