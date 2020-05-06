@@ -22,6 +22,8 @@ module.exports.index = function (req, res) {
 });
 };
 
+
+
 module.exports.searchProducts = function (req, res) {
   var id = req.params.storeId;
   var q = req.query.q;
@@ -30,7 +32,7 @@ module.exports.searchProducts = function (req, res) {
 		var storeId = result[0].storeId;
   		con.query('SELECT * FROM products WHERE storeId = ?', storeId, function (err, result) { // retrieve data 
 	    if (err) throw err;
-	    //console.log(result);
+	    console.log(result);
 	    var matchedProducts = result.filter(function(product){
 	      return product.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
 	    });

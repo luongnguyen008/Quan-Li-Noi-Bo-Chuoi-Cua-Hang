@@ -75,6 +75,7 @@ module.exports.deleteUsers = function(req, res){
 module.exports.storeProducts = function(req, res){
    con.query('SELECT * FROM products WHERE storeId = ?',req.params.storeId, function (err, result) { // retrieve data 
     if (err) throw err;
+    console.log(result[0].picture);
     res.render('./products/products', { products: result});
 
   });
@@ -95,6 +96,31 @@ module.exports.postEditStores =  function(req, res){
     if (err) throw err;
      res.redirect('/stores');
   });
+};
+module.exports.createProduct = function (req, res) {
+ var storeId = req.params.storeId;
+  res.render('./products/createProduct');
+};
+
+
+module.exports.postCreateProduct = function (req, res) {
+ var storeId = req.params.storeId;  
+ req.body.picture = req.file.path.split('\\').slice(1).join('/');
+ //console.log(req.body.picture);
+  var values = [
+        req.body.id, 
+        req.body.name, 
+        req.body.price,
+        req.body.quantity,
+        req.body.storeId,
+        req.body.picture 
+  ]; // create an array that include user inputs 
+  //console.log(req.body) //test
+    con.query('INSERT INTO products (id, name, price, quantity, storeId, picture) VALUES (?)',[values], function(err, result){
+        if(err) throw err;
+            console.log("1 record inserted"); //checked
+        });
+  res.redirect('/stores')// update added dream
 };
 
 module.exports.deleteStore = function(req, res){
@@ -144,3 +170,46 @@ module.exports.postCreateStore = function (req, res) {
         });
   res.redirect('/stores')// update added dream
 };
+
+module.exports.searchProducts = function(req, res){
+  var id = req.params.storeId;
+  var q = req.query.q;
+  con.query('SELECT * FROM products WHERE storeId = ?', id, function (err, result) { // retrieve data 
+    if (err) throw err;
+    //console.log(result);
+    var matchedProducts = result.filter(function(products){
+      return products.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
+    });
+    res.render('./products/products', { products: matchedProducts});
+  });
+};
+
+module.exports.editProducts = function(req, res){
+  var id = req.params.id
+  con.query('SELECT * FROM products WHERE id = ?',id, function (err, result){
+    if (err) throw err;
+    //console.log(result[0].id);
+    res.render('./products/editProduct', {products : result});
+});
+};
+
+
+module.exports.postEditProducts =  function(req, res){
+  var storeId = req.params.storeId
+  req.body.picture = req.file.path.split('\\').slice(1).join('/');
+   console.log( req.body.picture);
+  con.query('UPDATE products SET id = ? ,name = ?, price =?, quantity=?, storeId=?, picture=? WHERE id =? ',[req.body.id, req.body.name, req.body.price, req.body.quantity,req.body.storeId,req.body.picture, req.params.id],  function(err, result){
+    if (err) throw err;
+    console.log( req.body);
+     res.redirect('/stores/'+ storeId +'/products');
+  });
+};
+module.exports.deleteProducts = function(req, res){
+   var id = req.params.id;
+   var storeId = req.params.storeId
+  con.query('DELETE FROM products WHERE id = ?',id, function (err, result){
+    if (err) throw err;
+  res.redirect('/stores/'+ storeId +'/products');
+ });
+};
+
