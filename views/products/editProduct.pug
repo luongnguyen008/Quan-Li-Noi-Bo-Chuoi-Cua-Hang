@@ -1,0 +1,26 @@
+extends ../layouts/common
+block content
+ .container.mt-3
+  h3.text-center Edit Information Products
+  form(method='POST', enctype="multipart/form-data")
+
+    .form-group
+    label(for='id') ID
+    input.form-control.col-md-6(type='text', name='id', value=products ? products[0].id : "")
+
+    label(for='name') Name of Product
+    input.form-control.col-md-6(type='text', name='name', value=products ? products[0].name : "")
+
+    label(for='price') Price
+    input.form-control.col-md-6(type='text', name='price', value=products ? products[0].price : "")
+
+    label(for='quantity') Quantity 
+    input.form-control.col-md-6(type='text', name='quantity', value=products ? products[0].quantity : "")
+
+    label(for='storeId') Store ID
+    input.form-control.col-md-6(type='text', name='storeId', value=products ? products[0].storeId : "")
+
+    label(for='picture') Picture
+    input.form-control-file(type='file', name='picture', value=products ? products[0].picture : "")
+    br
+    button.btn.btn-primary Submit
