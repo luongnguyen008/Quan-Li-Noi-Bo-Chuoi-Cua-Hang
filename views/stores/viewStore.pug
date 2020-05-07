@@ -27,3 +27,19 @@ html
           li 
             a.btn.btn-outline-success(href='/logout') Log out
       main
+        h2 Infomation staff
+        p
+        b StoresID:
+        span= stores[0].storeId
+
+        br
+        b Name:
+        span= stores[0].storeName
+
+        br
+        b Address:
+        span= stores[0].storeAddress
+
+        br
+        b Date In:
+        span= stores[0].dateCreate
