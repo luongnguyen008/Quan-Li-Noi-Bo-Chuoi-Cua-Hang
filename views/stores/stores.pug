@@ -1,29 +1,52 @@
-link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css")
-link(rel='stylesheet' type='text/css' href="/stylesheets/style.css")
-br
-a.btn.btn-success(href='/users/create') Add New User
-a.btn.btn-Success(href='/stores/createStore') Add New Store
-a.btn.btn-primary(href='/logout') Log out
-h2 List of Stores
-  table.table
-    thead.thead-dark
-      tr
-        th Stores Id
-        th Name of Stores
-        th Address of Store
-        th Date Open
-        th
-        th
-        th
-    each store in stores  
-      tr 
-        td= store.storeId
-        td= store.storeName
-        td= store.storeAddress
-        td= store.dateCreate
-        td
-          a.btn.btn-primary(href='/stores/'+ store.storeId) View
-        td
-          a.btn.btn-Success(href='/stores/' + store.storeId + '/edit' ) Edit
-        td
-          a.btn.btn-Danger(href='/stores/deleteStore/'+ store.storeId) Delete
+html
+   head
+    meta(charset='utf-8')
+    title Welcome to my website!
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='A cool thing made with Glitch')
+    link#favicon(rel='icon', href='/images/favicon-96x96.png', type='image/png')
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css", integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh", crossorigin="anonymous")
+   body
+      header
+       nav.navbar.navbar-expand-lg.navbar-light.bg-light
+        ul.navbar-nav.mr-auto
+          li.nav-item.active.col-md-5
+            a.nav.btn.btn-outline-dark(href='/users/create') Add new user 
+          li.nav-item.active.col-md-5
+            a.nav.btn.btn-outline-dark(href='/stores/createStore') Add new store
+          li.nav-item.active.col-md-4
+            a.nav.btn.btn-outline-dark(href='/about') About
+        ul.navbar-nav.ml-auto
+          li
+            if user
+             p.nav-link(href='#')= user.name
+          li
+            if !user
+             a.btn.btn-primary(href='/auth/login') Login
+          li 
+            a.btn.btn-outline-success(href='/logout') Log out
+      main
+          h2 List of Stores
+            table.table
+              thead.thead-dark
+                tr
+                  th Stores Id
+                  th Name of Stores
+                  th Address of Store
+                  th Date Open
+                  th
+                  th
+                  th
+              each store in stores  
+                tr 
+                  td= store.storeId
+                  td= store.storeName
+                  td= store.storeAddress
+                  td= store.dateCreate
+                  td
+                    a.btn.btn-primary(href='/stores/'+ store.storeId) View
+                  td
+                    a.btn.btn-Success(href='/stores/' + store.storeId + '/edit' ) Edit
+                  td
+                    a.btn.btn-Danger(href='/stores/deleteStore/'+ store.storeId) Delete
