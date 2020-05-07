@@ -6,26 +6,26 @@ block content
 	h2.text-center Create Product
 	.container.mt-3
 		form(action="/stores/"+ storeId + "/products/createProduct", method="POST", enctype="multipart/form-data")
-			.form-group
+			.form-group.col-md-6
 				label ID Product
-				input.form-control.col-md-6(name='id', type='text', maxlength='100', value=values ? values.id : "")
-			.form-group
+				input.form-control(name='id', type='text', maxlength='100', value=values ? values.id : "")
+			.form-group.col-md-6
 				label Name of Product
-				input.form-control.col-md-6(name='name', type='text', maxlength='100', value=values ? values.name : "")
+				input.form-control(name='name', type='text', maxlength='100', value=values ? values.name : "")
 
-			.form-group
+			.form-group.col-md-6
 				label Price
-				input.form-control.col-md-6(name='price', type='text', maxlength='100', value=values ? values.price : "")
+				input.form-control(name='price', type='text', maxlength='100', value=values ? values.price : "")
 
-			.form-group
-				label Store Id
-				input.form-control.col-md-6(name='storeId', type='text', maxlength='100', value=values ? values.storeId : "")
+			.form-group.col-md-6
+				label StoreId
+				input.form-control(type='text', name='storeId', value=stores ? stores[0].storeId : "")
 					
-			.form-group
+			.form-group.col-md-6
 				label Quantity
-				input.form-control.col-md-6(name='quantity', type='text', maxlength='100', value=values ? values.quantity : "")
+				input.form-control(name='quantity', type='text', maxlength='100', value=values ? values.quantity : "")
 
-			.form-group
+			.form-group.col-md-6
 				label Picture
 				input.form-control-file(name='picture', type='file',maxlength='100', value=values ? values.picture : "")
 				br
