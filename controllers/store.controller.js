@@ -99,9 +99,11 @@ module.exports.postEditStores =  function(req, res){
 };
 module.exports.createProduct = function (req, res) {
  var storeId = req.params.storeId;
-  res.render('./products/createProduct');
+ con.query('SELECT * FROM stores WHERE storeId = ?',storeId, function (err, result){
+    if (err) throw err;
+  res.render('./products/createProduct', {stores : result});
+});
 };
-
 
 module.exports.postCreateProduct = function (req, res) {
  var storeId = req.params.storeId;  
