@@ -16,7 +16,10 @@ html
           li.nav-item.active
             a.nav-link(href='/products') Products
           li.nav-item
-            a.nav-link(href='/about') Cart
+            if session.cart.totalItems
+              a.nav-link(href='/cart') Cart (#{session.cart.totalItems})
+            else 
+              a.nav-link(href='/cart') Cart
           form.form-inline.mt-0(action='/products/search', method='GET')
             input.form-control.mr-sm-2(type='search', name='q', placeholder='Search', aria-label='Search')
             button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
@@ -38,9 +41,13 @@ html
                  img.card-img-top(src='https:www.vettedpetcare.com/vetted-blog/wp-content/uploads/2017/09/How-To-Travel-With-a-Super-Anxious-Cat-square.jpeg', alt='Card image cap', width='200', height='200')
                  .card-body
                   h5.card-title= product.name
+                  h5.cart-title= product.quantity
                   p.card-text Some quick example text &apos;s content.
-                  a.btn.btn-primary.btn-sm(href='#') Go somewhere
-      
+                  if product.quantity > 0 
+                    a.btn.btn-primary.btn-sm(href='/cart/add/'+ product.id) Add to cart
+                  if product.quantity == 0
+                    a.btn.btn-secondary.btn-sm(href='#') Sold out
+
       nav(aria-label='...' style='margin-top: 20; margin-left: 50')
         ul.pagination
           if(page === 1)
