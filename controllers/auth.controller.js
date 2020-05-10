@@ -2,6 +2,7 @@ var mysql = require('mysql');
 var con = require('../mysql-connection')
 var md5 = require('md5')
 
+
 module.exports.login = function (req, res, next) {
 	res.render('auth/login');
 };
@@ -32,9 +33,11 @@ module.exports.postLogin = function (req, res, next) {
 			});
 			return;
 		}
-		res.cookie('userId', result[0].id, {
-			signed: true
-		})
+		req.session.userId = result[0].id;
+		req.session.storeId = result[0].storeId;
+		req.session.cart = {};
+		//req.session.username = result[0].username;
+		console.log(req.session)
 		if (result[0].username.localeCompare('admin') === 0){
 			res.redirect('/stores');
 		}
