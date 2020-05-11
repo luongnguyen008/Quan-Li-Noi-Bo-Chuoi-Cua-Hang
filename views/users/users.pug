@@ -25,8 +25,7 @@ html
               if user
                p.nav-link(href='#')= user.name
             li
-              if !user
-               a.btn.btn-primary(href='/auth/login') Login
+              a.nav-link(href='/logout') Logout
       link(rel='stylesheet' type='text/css' href="/stylesheets/style.css")
       main
         h2 Oh hi,

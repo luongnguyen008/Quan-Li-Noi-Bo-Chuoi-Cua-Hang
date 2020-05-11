@@ -1,0 +1,35 @@
+html
+   head
+    meta(charset='utf-8')
+    title Welcome to my website!
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='A cool thing made with Glitch')
+    link#favicon(rel='icon', href='/images/favicon-96x96.png', type='image/png')
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css", integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh", crossorigin="anonymous")
+   body
+    header
+       nav.navbar.navbar-expand-lg.navbar-light.bg-light
+        ul.navbar-nav.mr-auto
+          li.nav-item
+            a.nav-link(href='/') Home
+          li.nav-item.active
+            a.nav-link(href='/products') Products
+    main
+
+      if products 
+        .cart.page
+          ul.list-group
+            each product in products
+              li.list-group-item.d-flex.justify-content-between.align-items-center
+                h2 #{product.item.name}
+                span.badge.badge-secondary #{product.quantity}
+                span #{product.price} vnđ
+                a.btn.btn-default(href='/cart/remove/'+ product.item.id)  Remove
+        .text-right
+          strong Total:  #{totalPrice}
+        hr
+        .text-right
+          a.btn.btn-success(href='/cart/checkout', type='button') Checkout
+      else 
+        Your shopping cart is empty.
