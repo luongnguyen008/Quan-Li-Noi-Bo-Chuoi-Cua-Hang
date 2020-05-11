@@ -14,7 +14,7 @@ module.exports.postLogin = function (req, res, next) {
 		if(result[0] === undefined || result[0].username !== username) {
 			res.render('auth/login', {
 				errors:[
-					'User Truy Cap Khong Hop Le'
+					'UserName Truy Cap Khong Hop Le'
 				],
 				values: req.body
 			});
