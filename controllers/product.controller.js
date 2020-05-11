@@ -21,9 +21,6 @@ module.exports.index = function (req, res) {
   });
 });
 };
-
-
-
 module.exports.searchProducts = function (req, res) {
   var id = req.params.storeId;
   var q = req.query.q;
