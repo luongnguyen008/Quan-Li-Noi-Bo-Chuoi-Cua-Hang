@@ -115,7 +115,7 @@ module.exports.postCreateProduct = function (req, res) {
         req.body.price,
         req.body.quantity,
         req.body.storeId,
-        req.body.picture 
+        req.body.picture,
   ]; // create an array that include user inputs 
   //console.log(req.body) //test
     con.query('INSERT INTO products (id, name, price, quantity, storeId, picture) VALUES (?)',[values], function(err, result){
