@@ -16,7 +16,6 @@ module.exports.requireAuth = function (req, res, next){
 	});
 };
 module.exports.adminAuth = function (req, res, next){
-	console.log(req.session.userId)
 	if(!req.session.userId){
 		res.redirect('/auth/login');
 		return;

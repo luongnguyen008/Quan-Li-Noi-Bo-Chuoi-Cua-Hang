@@ -4,15 +4,15 @@ var Cart = require('../models/cart');
 
 module.exports.cartIndex = function(req, res){
 	if (!req.session.cart) {
-    	return res.render('./cart/cart', {
-      		products: null
-    	});
-  	}
-  var cart = new Cart(req.session.cart);
-  res.render('./cart/cart', {
-    products: cart.getItems(),
-    totalPrice: cart.totalPrice
-  });
+		return res.render('./cart/cart', {
+			products: null
+		});
+	}
+	var cart = new Cart(req.session.cart);
+	res.render('./cart/cart', {
+		products: cart.getItems(),
+		totalPrice: cart.totalPrice
+	});
 };
 
 module.exports.addToCart = function(req, res) {
