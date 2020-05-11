@@ -18,13 +18,13 @@ main
       .col-sm-9.col-md-7.col-lg-5.mx-auto
         .card.card-signin.my-5
           .card-body
-            h5.card-title.text-center Sign In
+            h5.card-title.text-center login 
             form(method="POST")
               .form-label-group
                 input#inputUserName.form-control( name='username', type='text', placeholder='username', value=values ? values.username : "")
                 label(for='inputUserName') Name
               .form-label-group
-                input#inputPassword.form-control(name='password', type='text',placeholder='password', value=values ? values.password : "")
+                input#inputPassword.form-control(name='password', type='password',placeholder='password', value=values ? values.password : "")
                 label(for='inputPassword') Password
               .custom-control.custom-checkbox.mb-3
                 input#customCheck1.custom-control-input(type='checkbox')
