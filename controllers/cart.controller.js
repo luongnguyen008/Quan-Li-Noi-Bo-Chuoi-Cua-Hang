@@ -14,7 +14,6 @@ module.exports.cartIndex = function(req, res){
 		totalPrice: cart.totalPrice
 	});
 };
-
 module.exports.addToCart = function(req, res) {
 	var productId = req.params.productId;
 	var cart = new Cart(req.session.cart ? req.session.cart : {});
@@ -27,7 +26,6 @@ module.exports.addToCart = function(req, res) {
 		res.redirect('/products');
 });
 };
-
 module.exports.removeFromCart = function(req, res){
 	 var productId = req.params.productId;
 	 var cart = new Cart(req.session.cart ? req.session.cart : {});

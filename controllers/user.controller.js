@@ -27,7 +27,7 @@ module.exports.postCreate = function (req, res) {
         req.body.idcard,
         req.body.address,
         req.body.datein,
-        req.body.storeId
+        req.body.storeId,
   ]; // create an array that include user inputs 
   console.log(req.body) //test
     con.query('INSERT INTO users (id, username, password, name, dateofbirth, gender, phone, idcard, address, datein, storeId) VALUES (?)',[values], function(err, result){

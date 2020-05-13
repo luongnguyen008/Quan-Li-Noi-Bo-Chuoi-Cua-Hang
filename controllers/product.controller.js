@@ -4,7 +4,7 @@ var Cart = require('../models/cart');
 
 module.exports.index = function (req, res) {
 	var page = parseInt(req.query.page) || 1;
-	var perPage = 4;
+	var perPage = 6;
 	var start = (page -1)* perPage;
 	var end = page*perPage;
 
@@ -19,9 +19,6 @@ module.exports.index = function (req, res) {
 	    	});
   		});
 };
-
-
-
 module.exports.searchProducts = function (req, res) {
 	var id = req.params.storeId;
 	var q = req.query.q;

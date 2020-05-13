@@ -1,4 +1,4 @@
-html
+html79t
    head
     meta(charset='utf-8')
     title Welcome to my website!
@@ -7,23 +7,36 @@ html
     meta(name='description', content='A cool thing made with Glitch')
     link#favicon(rel='icon', href='/images/favicon-96x96.png', type='image/png')
     link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css", integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh", crossorigin="anonymous")
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
    body
       header
-       nav.navbar.navbar-expand-lg.navbar-light.bg-light
-        ul.navbar-nav.mr-auto
-          li.nav-item.active
-            a.nav-link(href='/stores') Home 
-            span.sr-only (current)
-          li.nav-item
-            a.nav-link(href='/users') Users
-          li.nav-item
-            a.nav-link(href='/products') Products
-          li.nav-item
-            a.nav-link(href='/about') About
-          form.form-inline.mt-0(action='/users/search', method='GET')
-            input.form-control.mr-sm-2(type='search', name='q', placeholder='Search', aria-label='Search')
-            button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
-          ul.navbar-nav.ml-auto
+       style.
+        body {font-family: "Lato", sans-serif}
+        .mySlides {display: none}
+      .w3-top
+        .w3-bar.w3-black.w3-card
+          a.w3-bar-item.w3-button.w3-padding-large.w3-hide-medium.w3-hide-large.w3-right(href='javascript:void(0)' onclick='myFunction()' title='Toggle Navigation Menu')
+            i.fa.fa-bars
+          a.w3-bar-item.w3-button.w3-padding-large(href='/stores/') HOME
+          a.w3-bar-item.w3-button.w3-padding-large.w3-hide-small(href='/users') USER
+          a.w3-bar-item.w3-button.w3-padding-large.w3-hide-small(href='/about') about
+
+
+          a.w3-bar-item.w3-button.w3-padding-large.w3-hide-small(href='/about') about
+
+          .w3-dropdown-hover.w3-hide-small
+            
+          a.w3-padding-large.w3-hover-red.w3-hide-small.w3-right(href='javascript:void(0)')
+            i.fa.fa-search
+      
+      .w3-content(style='max-width:2000px;margin-top:46px')
+    
+
+         ul.navbar-nav.ml-auto
             li
               if user
                p.nav-link(href='#')= user.name

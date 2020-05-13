@@ -15,7 +15,7 @@ module.exports.postLogin = function (req, res, next) {
 		if(result[0] === undefined || result[0].username !== username) {
 			res.render('auth/login', {
 				errors:[
-					'User does not exists'
+					'UserName Không Hợp Lệ'
 				],
 				values: req.body
 			});
