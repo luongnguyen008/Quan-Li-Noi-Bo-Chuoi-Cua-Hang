@@ -16,6 +16,13 @@ module.exports.create = function (req, res) {
 
 module.exports.postCreate = function (req, res) {
   req.body.id = shortid.generate(); //generate random id
+
+    var date = new Date();
+  var year = date.getFullYear().toString();
+  var month = (date.getMonth() + 101).toString().substring(1);
+  var day = (date.getDate() + 100).toString().substring(1);
+  datein = day + '/' + month + '/' + year;
+
   var values = [
         req.body.id, 
         req.body.username, 
@@ -26,8 +33,8 @@ module.exports.postCreate = function (req, res) {
         req.body.phone,
         req.body.idcard,
         req.body.address,
-        req.body.datein,
-        req.body.storeId,
+        datein,
+        req.body.storeId
   ]; // create an array that include user inputs 
   console.log(req.body) //test
     con.query('INSERT INTO users (id, username, password, name, dateofbirth, gender, phone, idcard, address, datein, storeId) VALUES (?)',[values], function(err, result){
