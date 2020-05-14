@@ -22,9 +22,12 @@ block content
 				label Date of birth
 				input.form-control.col-md-6(name='dateofbirth', type='date', maxlength='100', value=values ? values.dateofbirth : "")
 
-			.form-group
-				label Gender
-				input.form-control.col-md-6(name='gender', type='text', maxlength='100', value=values ? values.gender : "")
+			.custom-control.custom-checkbox.custom-control-inline
+				input#gender.custom-control-input(name='gender', type='checkbox', maxlength='100', value=values ? values.gender : "Nam")
+				label.custom-control-label(for='gender') Nam
+			.custom-control.custom-checkbox.custom-control-inline
+				input#gender.custom-control-input(name='gender', type='checkbox', maxlength='100', value=values ? values.gender : "Nữ")
+				label.custom-control-label(for='gender') Nữ
 
 			.form-group
 				label Phone 
@@ -37,10 +40,6 @@ block content
 			.form-group
 				label Address
 				input.form-control.col-md-6(name='address', type='text', maxlength='100', value=values ? values.address : "")
-
-			.form-group
-				label Date In
-				input.form-control.col-md-6(name='datein', type='date', maxlength='100', value=values ? values.datein : "")
 			
 			.form-group
 				label Store Id
