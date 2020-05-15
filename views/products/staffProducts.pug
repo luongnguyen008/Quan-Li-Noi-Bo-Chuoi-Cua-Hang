@@ -56,7 +56,7 @@ html
           if(page !== 1 && page<= numberOfPages)
             li.page-item
               a.page-link(href='/products?page='+ (page-1)) Previous
-          -for(var i= 1; i<= numberOfPages; i++){
+          -for(var i= 1; i<= numberOfPages; i++ ){
           if (page === i)
             li.page-item.active
               a.page-link(href='/products?page='+ i)
