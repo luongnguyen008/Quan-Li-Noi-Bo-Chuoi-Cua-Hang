@@ -1,5 +1,5 @@
-var mysql = require('mysql')
-var con = require('../mysql-connection')
+var mysql = require('mysql');
+var con = require('../mysql-connection');
 var Cart = require('../models/cart');
 
 module.exports.index = function (req, res) {
