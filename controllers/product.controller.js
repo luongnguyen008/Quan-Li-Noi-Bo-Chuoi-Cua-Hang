@@ -1,6 +1,7 @@
 var mysql = require('mysql');
 var con = require('../mysql-connection');
 var Cart = require('../models/cart');
+var md5 = require('md5');
 
 module.exports.index = function (req, res) {
 	var page = parseInt(req.query.page) || 1;
@@ -33,3 +34,49 @@ module.exports.searchProducts = function (req, res) {
 	});
 };
 
+module.exports.changePassword = function(req, res){
+  res.render('./products/changePassword');
+};
+
+module.exports.postChangePassword = function(req, res){
+	 var errors = [];
+	 var id = req.session.userId
+   var oldPassword = md5(req.body.oldPassword);
+  var newPassword = md5(req.body.newPassword);
+  var confirmPassword = md5(req.body.confirmPassword);
+  con.query('SELECT * FROM users WHERE id = ?',id, function (err, result){ 
+  var password = result[0].password;
+
+  if(oldPassword.localeCompare(password) ==0 && newPassword.localeCompare(confirmPassword)==0){
+  con.query('UPDATE users SET password = ? WHERE id =? ',[newPassword, id],  function(err, result){
+    if (err) throw err;
+     res.redirect('/products');
+  });
+
+  };
+     if(oldPassword.localeCompare(password) !=0 && newPassword.localeCompare(confirmPassword)==0){
+    errors.push("Old password wrong!!");
+    };
+    if(newPassword.localeCompare(confirmPassword) !=0 && oldPassword.localeCompare(password) ==0 ){
+    errors.push("Cofirm password wrong!!");
+    };
+    if(newPassword.localeCompare(confirmPassword) !=0 && oldPassword.localeCompare(password) !=0 ){
+    errors.push("Old password and confirm Password wrong!!");
+    };
+    if(newPassword.localeCompare(password) ==0 && oldPassword.localeCompare(password) ==0 && newPassword.localeCompare(confirmPassword) ==0){
+    errors.push("You can't use Old Password!!");
+    };
+    if(errors.length){
+        res.render('./products/changePassword', {
+      errors: errors,
+      values: req.body
+    });
+    return;
+  }
+
+
+ });
+
+
+
+};
