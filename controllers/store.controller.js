@@ -80,6 +80,20 @@ module.exports.storeProducts = function(req, res){
 
   });
 };
+
+module.exports.searchStores = function(req, res){
+  var id = req.session.storeId;
+  var q = req.query.q;
+  con.query('SELECT * FROM stores', function (err, result) { // retrieve data 
+    if (err) throw err;
+    //console.log(result);
+    var matchedStores = result.filter(function(store){
+      return store.storeName.toLowerCase().indexOf(q.toLowerCase()) !== -1;
+    });
+    res.render('./stores/stores', { stores: matchedStores});
+  });
+};
+
 module.exports.editStores = function(req, res){
   var id = req.params.storeId; 
   con.query('SELECT * FROM stores WHERE storeId = ?',id, function (err, result){
