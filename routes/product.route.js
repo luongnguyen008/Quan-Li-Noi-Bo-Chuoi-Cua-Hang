@@ -10,5 +10,8 @@ router.get('/', controller.index);
 
 router.get('/search',upload.single('picture'), controller.searchProducts);
 
+router.get('/changePassword/:id' , controller.changePassword);
+
+router.post('/changePassword/:id' , controller.postChangePassword);
 
 module.exports = router;
