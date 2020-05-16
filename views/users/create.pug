@@ -22,12 +22,14 @@ block content
 				label Date of birth
 				input.form-control.col-md-6(name='dateofbirth', type='date', maxlength='100', value=values ? values.dateofbirth : "")
 
-			.custom-control.custom-checkbox.custom-control-inline
-				input#gender.custom-control-input(name='gender', type='checkbox', maxlength='100', value=values ? values.gender : "Nam")
+			.form
+			.custom-control.custom-radio.custom-control-inline
+				input#gender.custom-control-input(name='gender', type='radio', value= 'Nam')
 				label.custom-control-label(for='gender') Nam
-			.custom-control.custom-checkbox.custom-control-inline
-				input#gender.custom-control-input(name='gender', type='checkbox', maxlength='100', value=values ? values.gender : "Nữ")
-				label.custom-control-label(for='gender') Nữ
+
+			.custom-control.custom-radio.custom-control-inline
+				input#gender1.custom-control-input(name='gender', type='radio', value= 'Nữ')
+				label.custom-control-label(for='gender1') Nữ
 
 			.form-group
 				label Phone 
