@@ -1,7 +1,7 @@
-var mysql = require('mysql')
-var con = require('../mysql-connection')
-const shortid = require('shortid')
-var md5 = require('md5')
+var mysql = require('mysql');
+var con = require('../mysql-connection');
+const shortid = require('shortid');
+var md5 = require('md5');
 
 
 module.exports.index = function (req, res) {

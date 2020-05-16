@@ -27,7 +27,7 @@ module.exports.postLogin = function (req, res, next) {
 		if(result[0].password !== hashedPassword){
 			res.render('auth/login', {
 				errors:[
-					'Wrong password!'
+					' Password không đúng'
 				],
 				values: req.body
 			});
