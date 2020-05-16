@@ -198,9 +198,7 @@ module.exports.editProducts = function(req, res){
 
 module.exports.postEditProducts =  function(req, res){
   var storeId = req.params.storeId
-  req.body.picture = req.file.path.split('\\').slice(1).join('/');
-   console.log( req.body.picture);
-  con.query('UPDATE products SET id = ? ,name = ?, price =?, quantity=?, storeId=?, picture=? WHERE id =? ',[req.body.id, req.body.name, req.body.price, req.body.quantity,req.body.storeId,req.body.picture, req.params.id],  function(err, result){
+  con.query('UPDATE products SET id = ? ,name = ?, price =?, quantity=?, storeId=? WHERE id =? ',[req.body.id, req.body.name, req.body.price, req.body.quantity,req.body.storeId, req.params.id],  function(err, result){
     if (err) throw err;
     console.log( req.body);
      res.redirect('/stores/'+ storeId +'/products');
