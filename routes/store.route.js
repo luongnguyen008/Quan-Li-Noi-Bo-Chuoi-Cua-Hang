@@ -6,6 +6,8 @@ var upload = multer({ dest: './public/uploads/' });
 
 router.get('/', controller.index);
 
+router.get('/searchStores', controller.searchStores);
+
 router.get('/createStore', controller.createStore);
 
 router.post('/createStore', controller.postCreateStore);
@@ -37,6 +39,7 @@ router.get('/:storeId/products/searchProducts',upload.single('picture'),controll
 router.get('/:storeId/products/editProduct/:id', controller.editProducts);
 
 router.post('/:storeId/products/editProduct/:id', upload.single('picture'), controller.postEditProducts);
+
 
 router.get('/:storeId/edit', controller.editStores);
 
