@@ -11,15 +11,17 @@ html
       header
        nav.navbar.navbar-expand-lg.navbar-light.bg-light
         ul.navbar-nav.mr-auto
-          li.nav-item
-            a.nav.btn.btn-secondary(href='/products') Home
-          li.nav-item.active
-            a.nav.bnt.btn-outline-success(href='/products') Products
-          li.nav-item
+          li.nav-item.active.col.md-3
+            a.nav-secondary(href='/products') Home
+          li.nav-item.active.col.md-3
+            a.nav-success(href='/products') Products
+          li.nav-item.active.col.md-3
+            a.nav-success(href='/products/changePassword/'+user.id) Change Password
+          li.nav-item.active.col.md-3
             if session.cart.totalItems
-              a.nav.btn.btn-outline-dark(href='/cart') Cart (#{session.cart.totalItems})
+              a.nav-dark(href='/cart') Cart (#{session.cart.totalItems})
             else 
-              a.nav.btn.btn-outline-primary(href='/cart') Cart
+              a.nav-primary(href='/cart') Cart
           form.form-inline.mt-0(action='/products/search', method='GET')
             input.form-control.mr-sm-2(type='search', name='q', placeholder='Search', aria-label='Search')
             button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
