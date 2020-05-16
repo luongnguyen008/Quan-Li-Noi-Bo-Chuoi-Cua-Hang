@@ -24,13 +24,10 @@ module.exports.postCreate = function(req, res, next){
   if(!req.body.address){
     errors.push("address is required");
   }
-  if(!req.body.datein){
-    errors.push("datein is required");
-  }
   if(!req.body.storeId){
     errors.push("Id store is required");
   }
-  if(errors.length){
+    if(errors.length){
     res.render('./users/create', {
       errors: errors,
       values: req.body
