@@ -1,35 +1,28 @@
-html
-   head
-    meta(charset='utf-8')
-    title Welcome to my website!
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    meta(name='description', content='A cool thing made with Glitch')
-    link#favicon(rel='icon', href='/images/favicon-96x96.png', type='image/png')
-    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css", integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh", crossorigin="anonymous")
+extends ../layouts/common
+block content
    body
       header
        nav.navbar.navbar-expand-lg.navbar-light.bg-light
         ul.navbar-nav.mr-auto
-          li.nav-item.active.col-md-5
-            a.nav.btn.btn-outline-dark(href='/stores/') Home
-          li.nav-item.active.col-md-5
-            a.nav.btn.btn-outline-dark(href='/stores/' + stores[0].storeId + '/users') Users
-          li.nav-item.active.col-md-5
-            a.nav.btn.btn-outline-dark(href='/stores/' + stores[0].storeId + '/products') Products
-          li.nav-item.active.col-md-4
-            a.nav.btn.btn-outline-dark(href='/stores/' + stores[0].storeId + '/products/createProduct') About
+          li.nav-item
+            a.nav-link(href='/stores/') Home
+          li.nav-item
+            a.nav-link(href='/stores/' + stores[0].storeId + '/users') Users
+          li.nav-item
+            a.nav-link(href='/stores/' + stores[0].storeId + '/products') Products
+          li.nav-item
+            a.nav-link(href='/stores/' + stores[0].storeId + '/statistics') Sales Statistics
         ul.navbar-nav.ml-auto
           li
-            if users
-             p.nav-link(href='#')= user.name
+            if user
+              p.nav-link(href='#')= user.name
           li
             if !user
              a.btn.btn-primary(href='/auth/login') Login
           li 
-            a.btn.btn-outline-success(href='/logout') Log out
+            a.nav-link(href='/logout') Log out
       main
-        h2 Infomation staff
+        h2 Infomation of #{stores[0].storeName}
         p
         b StoresID:
         span= stores[0].storeId
