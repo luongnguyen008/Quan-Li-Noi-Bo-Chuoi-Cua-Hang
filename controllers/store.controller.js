@@ -224,13 +224,12 @@ module.exports.viewStatisticsIndex = function(req, res){
 }
 
 module.exports.viewResult = function(req, res){
-  console.log(req.query.dateFrom);
   var dateFrom = req.params.from.replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3")
   var dateTo = req.params.to.replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3")
   var storeId = req.params.storeId
-  //var query = con.query('SELECT orderDate FROM cart WHERE orderDate BETWEEN ? AND ? AND storeId =? GROUP BY DATE(orderDate) ORDER BY DATE(orderDate)', [dateFrom, dateTo, storeId],function (err, result) {
-  //});
-  //console.log(query.sql)
+  var query = con.query('SELECT orderDate FROM cart WHERE orderDate BETWEEN ? AND ? AND storeId =? GROUP BY DATE(orderDate) ORDER BY DATE(orderDate)', [dateFrom, dateTo, storeId],function (err, result) {
+  });
+  console.log(query.sql)
   con.query('SELECT orderDate FROM cart WHERE orderDate BETWEEN ? AND ? AND storeId =? GROUP BY DATE(orderDate) ORDER BY DATE(orderDate)', [dateFrom, dateTo, storeId],function (err, result) {
     var dateArr = [];
     var sumArr = [];
