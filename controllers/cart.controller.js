@@ -1,5 +1,5 @@
-var mysql = require('mysql');
-var con = require('../mysql-connection');
+var mysql = require('mysql')
+var con = require('../mysql-connection')
 var Cart = require('../models/cart');
 
 module.exports.cartIndex = function(req, res){
@@ -14,6 +14,7 @@ module.exports.cartIndex = function(req, res){
 		totalPrice: cart.totalPrice
 	});
 };
+
 module.exports.addToCart = function(req, res) {
 	var productId = req.params.productId;
 	var cart = new Cart(req.session.cart ? req.session.cart : {});
@@ -21,11 +22,12 @@ module.exports.addToCart = function(req, res) {
 	con.query('SELECT * FROM products WHERE id = ? and storeId = ?',[productId,storeId] , function (err, result) {
 		cart.add(result[0], productId);
 		req.session.cart = cart;
-		//console.log(req.session.cart);
+		console.log(req.session.cart.items);
 		//console.log(cart.items[productId].item.id)
 		res.redirect('/products');
 });
 };
+
 module.exports.removeFromCart = function(req, res){
 	 var productId = req.params.productId;
 	 var cart = new Cart(req.session.cart ? req.session.cart : {});
@@ -41,9 +43,10 @@ module.exports.checkOut = function(req, res){
 	var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 	var dateTime = date+' '+time;
 
-	var productId = Object.keys(req.session.cart.items);
+	var productId = Object.keys(req.session.cart.items); // array of productId in cart
 	var storeId = req.session.storeId;
 	var cart = [req.session.cart.cartId, req.session.userId, dateTime, req.session.storeId, req.session.cart.totalPrice]
+
 	con.query('INSERT INTO cart (cartId, userId, orderDate, storeId, total) VALUES (?)', [cart], function(err, result){
 		if (err) throw err;
 	});
@@ -55,6 +58,7 @@ module.exports.checkOut = function(req, res){
 	};
 	console.log(req.session.cart.cartId)
 	for (var i =0; i< productId.length; i++){
+		console.log(req.session.cart.items[productId[i]].quantity)
 		var updatedQuantity = req.session.cart.items[productId[i]].item.quantity - req.session.cart.items[productId[i]].quantity;
 		con.query('UPDATE products SET quantity = ? WHERE storeId = ? AND id = ?', [updatedQuantity, storeId, productId[i]], function(err, result){
 			if (err) throw err;
