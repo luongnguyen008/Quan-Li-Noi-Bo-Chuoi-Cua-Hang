@@ -1,7 +1,7 @@
-var mysql = require('mysql');
-var con = require('../mysql-connection');
-const shortid = require('shortid');
-var md5 = require('md5');
+var mysql = require('mysql')
+var con = require('../mysql-connection')
+const shortid = require('shortid')
+var md5 = require('md5')
 
 module.exports.index = function (req, res) {
     con.query('SELECT * FROM stores', function (err, result) { // retrieve data 
@@ -80,20 +80,6 @@ module.exports.storeProducts = function(req, res){
 
   });
 };
-
-module.exports.searchStores = function(req, res){
-  var id = req.session.storeId;
-  var q = req.query.q;
-  con.query('SELECT * FROM stores', function (err, result) { // retrieve data 
-    if (err) throw err;
-    //console.log(result);
-    var matchedStores = result.filter(function(store){
-      return store.storeName.toLowerCase().indexOf(q.toLowerCase()) !== -1;
-    });
-    res.render('./stores/stores', { stores: matchedStores});
-  });
-};
-
 module.exports.editStores = function(req, res){
   var id = req.params.storeId; 
   con.query('SELECT * FROM stores WHERE storeId = ?',id, function (err, result){
@@ -129,7 +115,7 @@ module.exports.postCreateProduct = function (req, res) {
         req.body.price,
         req.body.quantity,
         req.body.storeId,
-        req.body.picture,
+        req.body.picture 
   ]; // create an array that include user inputs 
   //console.log(req.body) //test
     con.query('INSERT INTO products (id, name, price, quantity, storeId, picture) VALUES (?)',[values], function(err, result){
@@ -212,9 +198,11 @@ module.exports.editProducts = function(req, res){
 
 module.exports.postEditProducts =  function(req, res){
   var storeId = req.params.storeId
-  con.query('UPDATE products SET id = ? ,name = ?, price =?, quantity=?, storeId=? WHERE id =? ',[req.body.id, req.body.name, req.body.price, req.body.quantity,req.body.storeId, req.params.id],  function(err, result){
+  req.body.picture = req.file.path.split('\\').slice(1).join('/');
+   //console.log( req.body.picture);
+  con.query('UPDATE products SET id = ? ,name = ?, price =?, quantity=?, storeId=?, picture=? WHERE id =? ',[req.body.id, req.body.name, req.body.price, req.body.quantity,req.body.storeId,req.body.picture, req.params.id],  function(err, result){
     if (err) throw err;
-    console.log( req.body);
+    //console.log( req.body);
      res.redirect('/stores/'+ storeId +'/products');
   });
 };
@@ -225,5 +213,39 @@ module.exports.deleteProducts = function(req, res){
     if (err) throw err;
   res.redirect('/stores/'+ storeId +'/products');
  });
+};
+
+module.exports.viewStatisticsIndex = function(req, res){
+  var storeId = req.params.storeId;
+  con.query('SELECT * FROM stores WHERE storeId = ?',storeId, function (err, result) { 
+    if (err) throw err;
+    res.render('./salesStatistics/index', {stores: result} )
+});
+}
+
+module.exports.viewResult = function(req, res){
+  console.log(req.query.dateFrom);
+  var dateFrom = req.params.from.replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3")
+  var dateTo = req.params.to.replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3")
+  var storeId = req.params.storeId
+  //var query = con.query('SELECT orderDate FROM cart WHERE orderDate BETWEEN ? AND ? AND storeId =? GROUP BY DATE(orderDate) ORDER BY DATE(orderDate)', [dateFrom, dateTo, storeId],function (err, result) {
+  //});
+  //console.log(query.sql)
+  con.query('SELECT orderDate FROM cart WHERE orderDate BETWEEN ? AND ? AND storeId =? GROUP BY DATE(orderDate) ORDER BY DATE(orderDate)', [dateFrom, dateTo, storeId],function (err, result) {
+    var dateArr = [];
+    var sumArr = [];
+    for( var i =0; i< result.length; i++){
+      var date = new Date(result[i].orderDate);
+      var dateAndMonth = date.getUTCDate().toString() + "-" + (date.getUTCMonth() + 1).toString()
+      dateArr.push(dateAndMonth);
+    }
+    con.query('SELECT SUM(total) AS sum FROM cart WHERE orderDate BETWEEN ? AND ? AND storeId =? GROUP BY DATE(orderDate) ORDER BY DATE(orderDate)', [dateFrom, dateTo, storeId],function (err, result) {
+      for( var i =0; i< result.length; i++){
+        sumArr.push(result[i].sum)
+      }
+      //console.log(dateArr)
+      res.render('./salesStatistics/chart', {dateArr, sumArr, storeId});
+    });
+  });
 };
 
