@@ -1,0 +1,53 @@
+extends ../layouts/common
+block content
+   body
+      script(type="text/javascript", src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js')
+      header
+       nav.navbar.navbar-expand-lg.navbar-light.bg-light
+        ul.navbar-nav.mr-auto
+          li.nav-item
+            a.nav-link(href='/stores/') Home
+          li.nav-item
+            a.nav-link(href='/stores/' + storeId + '/users') Users
+          li.nav-item
+            a.nav-link(href='/stores/' + storeId + '/products') Products
+          li.nav-item.active
+            a.nav-link(href='/stores/' + storeId + '/statistics') Sales Statistics
+        ul.navbar-nav.ml-auto
+          li
+            if user
+              p.nav-link(href='#')= user.name
+          li
+            if !user
+             a.btn.btn-primary(href='/auth/login') Login
+          li 
+            a.nav-link(href='/logout') Log out
+   main
+        div(style='position:absolute; top:100px; left:300px; width:550px; height:550px;')
+          canvas#myChart(width='800', height='500')
+            script.
+              var datearr = ["#{dateArr}"];
+              var dateArr = datearr[0].split(",");
+              var sumArr = [#{sumArr}];
+              var ctx = document.getElementById('myChart');
+              var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                  labels: dateArr,
+                  datasets: [{
+                    label: '# of Votes',
+                    data: sumArr,
+                    fill: false,
+                    backgroundColor:
+                    'rgba(102, 153, 255, 0.4)'
+                    ,
+                    borderColor: 
+                    'rgba(102, 153, 255, 1)'
+                    ,
+                    borderWidth: 1
+                  }]
+                },
+                options: {
+                  responsive: false
+                }
+              });

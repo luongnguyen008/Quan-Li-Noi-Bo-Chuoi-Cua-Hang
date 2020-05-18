@@ -1,0 +1,56 @@
+extends ../layouts/common
+block content
+   body
+      header
+       nav.navbar.navbar-expand-lg.navbar-light.bg-light
+        ul.navbar-nav.mr-auto
+          li.nav-item
+            a.nav-link(href='/stores/') Home
+          li.nav-item
+            a.nav-link(href='/stores/' + stores[0].storeId + '/users') Users
+          li.nav-item
+            a.nav-link(href='/stores/' + stores[0].storeId + '/products') Products
+          li.nav-item.active
+            a.nav-link(href='/stores/' + stores[0].storeId + '/statistics') Sales Statistics
+        ul.navbar-nav.ml-auto
+          li
+            if user
+              p.nav-link(href='#')= user.name
+          li 
+            a.nav-link(href='/logout') Log out
+      main
+        script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js')
+        script.
+          var app = angular.module('myApp', []);
+          app.controller('myCtrl', function($scope, $filter) {
+            $scope.dateFrom = $filter("date")('yyyy-MM-dd');
+            $scope.dateTo = $filter("date")('yyyy-MM-dd');
+            $scope.timeRange = function(){
+              var date1 = $scope.dateFrom.getDate()
+              var month1 = $scope.dateFrom.getMonth() +1
+              var year1 = $scope.dateFrom.getFullYear()
+              if (date1 < 10)
+                date1 = '0' + date1
+              if (month1 < 10)
+                month1 = '0' + month1
+              var date2 = $scope.dateTo.getDate()
+              var month2 = $scope.dateTo.getMonth() +1
+              var year2 = $scope.dateTo.getFullYear()
+              if (date2 < 10)
+                date2 = '0' + date2
+              if (month2 < 10)
+                month2 = '0' + month2
+              var time = year1+""+month1+""+date1+"-"+year2+""+month2+""+date2;
+              return time
+            } ;
+
+          });
+        div(ng-app='myApp', ng-controller='myCtrl', style='margin-top: 60px; margin-left: 20px;')
+          form(autocomplete='off')
+            input(type='date', ng-model='dateFrom', value='{{dateFrom}}')
+            input(type='date', ng-model='dateTo', value='{{dateTo}}')
+            br
+            a.btn.btn-primary(href='/stores/' + stores[0].storeId + "/statistics/{{timeRange()}}") Submit
+
+      
+        
