@@ -1,0 +1,53 @@
+extends ../layouts/common
+block content
+   body
+      header
+       nav.navbar.navbar-expand-lg.navbar-light.bg-light
+        ul.navbar-nav.mr-auto
+          li.nav-item
+            a.nav-link(href='/stores') Home
+          li.nav-item.active
+            a.nav-link(href='') Users
+          li.nav-item
+            a.nav-link(href='/stores/'+ users[0].storeId +'/products') Products
+          li.nav-item
+            a.nav-link(href='/stores/' + users[0].storeId + '/statistics') Sales Statistics
+          form.form-inline.mt-0(action='/stores/'+ users[0].storeId +'/users/search', method='GET')
+            input.form-control.mr-sm-2(type='search', name='q', placeholder='Search', aria-label='Search')
+            button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
+        ul.navbar-nav.ml-auto
+          li
+            if user
+             p.nav-link(href='#')= user.name
+          li
+            a.nav-link(href='/logout') Logout
+      link(rel='stylesheet' type='text/css' href="/stylesheets/style.css")
+      main
+        h2 List staff,
+        table.table
+         thead.thead-dark
+          tr
+            th ID
+            th Name
+            th Username
+            th Id Card
+            th Date of birth
+            th Gender
+            th Phone
+            th Address
+            th Date In
+            th
+          
+          each user in users
+            tr 
+              td= user.id
+              td= user.name
+              td= user.username
+              td= user.idcard
+              td= user.dateofbirth
+              td= user.gender
+              td= user.phone
+              td= user.address
+              td= user.datein
+              td
+                a.btn.btn-info(href='/users/diligence/'+ user.id) Edit

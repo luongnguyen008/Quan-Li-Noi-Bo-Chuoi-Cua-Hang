@@ -1,0 +1,52 @@
+extends ../layouts/common
+block content
+   body
+      header
+       nav.navbar.navbar-expand-lg.navbar-light.bg-light
+        ul.navbar-nav.mr-auto
+          li.nav-item
+            a.nav-link(href='/stores') Home
+          li.nav-item.active
+            a.nav-link(href='') Users
+          li.nav-item
+            a.nav-link(href='') Products
+          li.nav-item
+            a.nav-link(href='/users/calculateSalary') Calculate Salary
+          form.form-inline.mt-0(action='', method='GET')
+            input.form-control.mr-sm-2(type='search', name='q', placeholder='Search', aria-label='Search')
+            button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
+        ul.navbar-nav.ml-auto
+          li
+            if user
+             p.nav-link(href='#')= user.name
+          li
+            a.nav-link(href='/logout') Logout
+      link(rel='stylesheet' type='text/css' href="/stylesheets/style.css")
+      main.col-md-10
+        h2.text-center List staff
+        h6 Tìm theo tháng
+        form.form-inline.mt-0(action='/users/listSalary/searchSalary', method='GET')
+          input.form-control.mr-sm-2(type='search', name='q', placeholder='Search', aria-label='Search')
+          button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
+        table.table
+         thead.thead-dark
+          tr
+            th ID
+            th Name
+            th Date of birth
+            th Gender
+            th Salary
+            th Date Start
+            th Date Final
+            th
+          each user in users
+            tr 
+              td= user.id
+              td= user.name
+              td= user.dateofbirth
+              td= user.gender
+              td= user.salary
+              td= user.dateStart
+              td= user.dateFinal
+              td
+                a.btn.btn-Success(href='/users/editSalary/' + user.idSalary ) Edit
