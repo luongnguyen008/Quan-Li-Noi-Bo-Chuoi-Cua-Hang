@@ -1,4 +1,4 @@
-const express = require('express')
+const express = require('express');
 const port = 3000
 var userRoute = require('./routes/user.route');
 var productRoute = require('./routes/product.route');
@@ -6,9 +6,9 @@ var storeRoute= require('./routes/store.route');
 var authRoute = require('./routes/auth.route');
 var cartRoute = require('./routes/cart.route');
 //const cookieParser = require('cookie-parser');
-var session = require('express-session')
-const app = express()
-var authMiddleware = require('./middlewares/auth.middleware')
+var session = require('express-session');
+const app = express();
+var authMiddleware = require('./middlewares/auth.middleware');  
 
 app.set('views', './views')
 app.set('view engine', 'pug')
