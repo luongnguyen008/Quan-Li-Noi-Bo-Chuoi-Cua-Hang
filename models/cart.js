@@ -1,4 +1,4 @@
-const shortid = require('shortid')
+const shortid = require('shortid');
 
 module.exports = function Cart(cart) {
     this.cartId = shortid.generate();
