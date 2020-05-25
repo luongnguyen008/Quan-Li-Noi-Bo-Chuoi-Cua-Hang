@@ -10,6 +10,8 @@ block content
             a.nav-link(href='/users/create') Add new user 
           li.nav-item
             a.nav-link(href='/stores/createStore') Add new store
+          li.nav-item
+            a.nav-link(href='/users/listSalary') List Salary of Staff
         ul.navbar-nav.ml-auto
           li
             if user
@@ -19,7 +21,7 @@ block content
              a.btn.btn-primary(href='/auth/login') Login
           li 
             a.nav-link(href='/logout') Log out
-      main
+      main.col-md-10
           h2 List of Stores
             table.table
               thead.thead-dark
