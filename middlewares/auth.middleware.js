@@ -1,5 +1,5 @@
-var mysql = require('mysql')
-var con = require('../mysql-connection')
+var mysql = require('mysql');
+var con = require('../mysql-connection');
 
 module.exports.requireAuth = function (req, res, next){
 	if(!req.session.userId){

@@ -1,6 +1,6 @@
 var mysql = require('mysql');
-var con = require('../mysql-connection')
-var md5 = require('md5')
+var con = require('../mysql-connection');
+var md5 = require('md5');
 
 
 module.exports.login = function (req, res, next) {
